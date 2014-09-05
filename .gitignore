@@ -7,14 +7,16 @@
 *.sln.docstates
 
 # Build results
-[Dd]ebug/
 [Dd]ebugPublic/
+[Dd]ebug/
 [Rr]elease/
 x64/
 build/
 bld/
 [Bb]in/
 [Oo]bj/
+
+!UtH/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
