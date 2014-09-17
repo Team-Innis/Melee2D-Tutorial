@@ -1,5 +1,9 @@
-#include <UtH/Engine/Scene.hpp>
+#pragma once
+#ifndef GAMESCENE_HPP
+#define GAMESCENE_HPP
 
+#include <UtH/Engine/Scene.hpp>
+#include <UtH/Engine/TMX/Map.hpp>
 
 
 class GameScene : public uth::Scene
@@ -12,12 +16,20 @@ public:
 
 
 
-    virtual bool Init();
+    bool Init() override;
 
-    virtual bool DeInit();
+    bool DeInit() override;
 
-    virtual bool Update(float dt);
+    bool Update(float dt) override;
 
-    virtual bool Draw();
+    bool Draw() override;
+
+
+
+private:
+
+    uth::TMX::Map m_map;
 
 };
+
+#endif // GAMESCENE_HPP

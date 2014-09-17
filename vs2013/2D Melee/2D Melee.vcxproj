@@ -85,11 +85,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Button.cpp" />
     <ClCompile Include="..\..\source\GameScene.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\MenuParticleAffector.cpp" />
+    <ClCompile Include="..\..\source\MenuScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Button.hpp" />
     <ClInclude Include="..\..\source\GameScene.hpp" />
+    <ClInclude Include="..\..\source\MenuParticleAffector.hpp" />
+    <ClInclude Include="..\..\source\MenuScene.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

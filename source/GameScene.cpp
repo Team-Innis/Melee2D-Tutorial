@@ -3,18 +3,21 @@
 
 GameScene::GameScene()
 {
-
+    //if (!m_map.LoadFromFile(""))
+    //{
+    //    //...
+    //}
 }
 
 GameScene::~GameScene()
 {
-
+    
 }
 
 
 bool GameScene::Init()
 {
-    return false;
+    return true;
 }
 
 bool GameScene::DeInit()

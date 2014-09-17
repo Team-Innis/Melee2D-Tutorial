@@ -1,28 +1,30 @@
-#include <UtH/Engine/UtHEngine.h> //UtHEngine main.
+#include <UtH/UtHEngine.hpp>
 #include <UtH/Engine/DefaultScene.hpp> //Default Scene. (Empty)
 
-#include "GameScene.hpp" //Your scene header.
+#include <MenuScene.hpp> //Your scene header.
+#include <GameScene.hpp>
 
 //Names and IDs for all scenes
 enum SceneName
 {
     DEFAULT = UTHDefaultScene,
-    HELLO = 0,
+    MENU = 0,
+    GAME = 1,
     COUNT // Keep this last, it tells how many scenes there are
 };
 
 // Create function for a new scene, having a case for every user made scene
 // Makes sure uthSceneM.GoToScene() pickes right scene with ID
-void NewSceneFunc(int SceneID, uth::Scene* &CurScene)
+uth::Scene* NewSceneFunc(int SceneID)
 {
     switch (SceneID)
     {
-        case HELLO:
-            CurScene = new GameScene();
-            break;
+        case MENU:
+            return new MenuScene();
+        case GAME:
+            return new GameScene();
         default:
-            CurScene = new uth::DefaultScene();
-            break;
+            return new uth::DefaultScene();
     }
 }
 
