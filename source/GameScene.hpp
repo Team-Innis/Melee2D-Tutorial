@@ -4,15 +4,18 @@
 
 #include <UtH/Engine/Scene.hpp>
 #include <UtH/Engine/TMX/Map.hpp>
+#include <UtH/Renderer/Camera.hpp>
+#include <UtH/Engine/SpriteBatch.hpp>
+#include <Player.hpp>
 
 
-class GameScene : public uth::Scene
+class GameScene final : public uth::Scene
 {
 public:
 
     GameScene();
 
-    ~GameScene();
+    ~GameScene() override;
 
 
 
@@ -29,6 +32,12 @@ public:
 private:
 
     uth::TMX::Map m_map;
+    uth::Camera m_camera;
+    bool m_paused;
+
+    uth::GameObject* m_player;
+    uth::SpriteBatch* m_enemyBatch;
+    std::vector<uth::Transform> m_enemies;
 
 };
 

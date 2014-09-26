@@ -9,13 +9,13 @@
 #include <memory>
 
 
-class MenuScene : public uth::Scene
+class MenuScene final : public uth::Scene
 {
 public:
 
     MenuScene();
 
-    ~MenuScene();
+    ~MenuScene() override;
 
 
 

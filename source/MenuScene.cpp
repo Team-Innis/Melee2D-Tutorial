@@ -1,14 +1,16 @@
 #include <MenuScene.hpp>
-#include <UtH/UtHEngine.hpp>
 #include <MenuParticleAffector.hpp>
+#include <UtH/UtHEngine.hpp>
 
 
 namespace
 {
     enum Layers
     {
-        Default,
-        BackGround
+        // Layers are by default updated and drawn from least to greatest.
+        // In this scene we want to draw the background first, so we give it a smaller id number.
+        Default = 1,
+        Background = 0
     };
 }
 
@@ -27,8 +29,8 @@ MenuScene::~MenuScene()
 bool MenuScene::Init()
 {
     // Create the default layer.
-    CreateLayer(BackGround);
     CreateLayer(Default);
+    CreateLayer(Background);
 
     // Set the randomizer seed, just in case it hasn't been set before.
     uth::Randomizer::SetSeed();
@@ -142,12 +144,12 @@ bool MenuScene::Update(float dt)
 
     /* Button floating animation */
     /**/ static float sine = 0.f;
-    /**/ static const pmath::Vec2 initial1 = m_buttons[0]->transform.GetPosition(),
-    /**/                          initial2 = m_buttons[1]->transform.GetPosition();
+    /**/ static const float initial0 = m_buttons[0]->transform.GetPosition().y,
+                            initial1 = m_buttons[1]->transform.GetPosition().y;
     /**/ sine += dt * (pi / 2.f);
     /**/
-    /**/ m_buttons[0]->transform.SetPosition(initial1.x, initial1.y + 10.f * std::sinf(sine));
-    /**/ m_buttons[1]->transform.SetPosition(initial2.x, initial2.y + 10.f * std::sinf(sine + (pi / 2.f)));
+    /**/ m_buttons[0]->transform.SetPosition(m_buttons[0]->transform.GetPosition().x, initial0 + 10.f * std::sinf(sine));
+    /**/ m_buttons[1]->transform.SetPosition(m_buttons[1]->transform.GetPosition().x, initial1 + 10.f * std::sinf(sine + (pi / 2.f)));
     /******************/
 
     // Update all layers.

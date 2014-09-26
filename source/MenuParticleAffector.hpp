@@ -7,7 +7,7 @@
 
 namespace ns
 {
-    class MenuParticleAffector : public uth::Affector
+    class MenuParticleAffector final : public uth::Affector
     {
     public:
 
@@ -15,7 +15,7 @@ namespace ns
 
         ~MenuParticleAffector() override;
 
-
+        // We'll need to override all three of the virtual functions.
         void InitParticle(uth::Particle& particle, const uth::ParticleTemplate& pt) override;
 
         void Update(float dt) override;

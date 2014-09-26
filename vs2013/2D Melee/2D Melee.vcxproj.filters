@@ -36,6 +36,12 @@
     <ClCompile Include="..\..\source\MenuParticleAffector.cpp">
       <Filter>Source Files\particle Affectors</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\PlayerSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\GameScene.hpp">
@@ -49,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\MenuParticleAffector.hpp">
       <Filter>Header Files\Particle Affectors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\PlayerSprite.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

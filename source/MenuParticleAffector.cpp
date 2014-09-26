@@ -48,11 +48,6 @@ void MenuParticleAffector::Update(float dt)
 
 void MenuParticleAffector::UpdateParticle(uth::Particle& particle, const uth::ParticleTemplate& pt, float dt)
 {
-    // Rotate the particle according to it's direction.
-    static const pmath::Vec2 upVec(0.f, -1.f);
-    pmath::Vec2 normal = particle.direction;
-    particle.SetRotation(pmath::radiansToDegrees(-std::acosf(upVec.dot(normal.normalize()))));
-
     // Rotate the direction vector by a random amount.
     const float sine = std::sinf(m_sine * m_offsets[GetSystem()->GetCurrentParticleNumber()]) / 140.f;
     const float rotCos = std::cos(sine);
@@ -60,6 +55,11 @@ void MenuParticleAffector::UpdateParticle(uth::Particle& particle, const uth::Pa
 
     particle.direction.x = rotCos * particle.direction.x - rotSin * particle.direction.y;
     particle.direction.y = rotSin * particle.direction.x + rotCos * particle.direction.y;
+
+    // Rotate the particle according to it's direction.
+    static const pmath::Vec2 upVec(0.f, -1.f);
+    pmath::Vec2 normal = particle.direction;
+    particle.SetRotation(pmath::radiansToDegrees(-std::acosf(upVec.dot(normal.normalize()))));
 
     // Add the particle's direction to its translation.
     particle.Move(particle.direction * dt);

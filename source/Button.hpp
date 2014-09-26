@@ -15,22 +15,29 @@ namespace uth
 
 namespace ns
 {
-    class Button : public uth::GameObject
+    class Button final : public uth::GameObject
     {
+
+        typedef std::function<void()> Callback;
+
     public:
 
         // Button requires knowledge of the render target this button is used with to transform
         // mouse coordinates to world coordinates.
         Button(const uth::RenderTarget& target, uth::Texture* texture);
 
-        void update(float dt) override;
-
-        void setCallback(std::function<void()> callback);
+        void setCallback(Callback callback);
 
     private:
 
+        // Overridden update method.
+        void update(float dt) override;
+
+
+        // Member data
+
         const uth::RenderTarget& m_target;
-        std::function<void()> m_callback;
+        Callback m_callback;
 
     };
 }
