@@ -1,6 +1,7 @@
 #include <Player.hpp>
 #include <PlayerSprite.hpp>
 #include <UtH/Platform/Input.hpp>
+#include <UtH/UtHEngine.hpp>
 
 
 using namespace ns;
@@ -13,17 +14,17 @@ namespace
 
 Player::Player()
     : uth::GameObject("Player"),
-      m_sprite(nullptr),
+      m_sprite(new PlayerSprite()),
       m_hitCooldown(0.25f),
       m_shootCooldown(0.25f)
 {
-    m_sprite = new PlayerSprite();
     AddComponent(m_sprite);
+    m_sprite->SetActive(true);
 }
 
 Player::~Player()
 {
-
+    
 }
 
 
@@ -39,4 +40,18 @@ void Player::update(float dt)
         m_sprite->HitAnim();
         m_hitCooldown = ns_hitCool;
     }
+    
+    auto mousePos = uthEngine.GetWindow().PixelToCoords(uthInput.Mouse.Position());
+    auto targetVec = (mousePos - transform.GetPosition()).unitVector();
+    static const pmath::Vec2 upVec(0.f, -1.f);
+
+    const bool rightMouse = mousePos.x >= transform.GetPosition().x;
+    transform.SetRotation((rightMouse ? 180.f : 0.f) + pmath::acos(upVec.dot(rightMouse ? targetVec : -targetVec)));
+    
+    const float speed = 50.f * dt;
+
+    transform.Move((uthInput.Keyboard.IsKeyDown(uth::Keyboard::A) -
+                    uthInput.Keyboard.IsKeyDown(uth::Keyboard::D)) * speed,
+                   (uthInput.Keyboard.IsKeyDown(uth::Keyboard::W) -
+                    uthInput.Keyboard.IsKeyDown(uth::Keyboard::S)) * speed);
 }

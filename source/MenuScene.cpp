@@ -3,19 +3,7 @@
 #include <UtH/UtHEngine.hpp>
 
 
-namespace
-{
-    enum Layers
-    {
-        // Layers are by default updated and drawn from least to greatest.
-        // In this scene we want to draw the background first, so we give it a smaller id number.
-        Default = 1,
-        Background = 0
-    };
-}
-
 MenuScene::MenuScene()
-    : m_running(true)
 {
     
 }
@@ -28,10 +16,6 @@ MenuScene::~MenuScene()
 
 bool MenuScene::Init()
 {
-    // Create the default layer.
-    CreateLayer(Default);
-    CreateLayer(Background);
-
     // Set the randomizer seed, just in case it hasn't been set before.
     uth::Randomizer::SetSeed();
 
@@ -81,9 +65,9 @@ bool MenuScene::Init()
         // In our case, id 1 is the game scene.
         uthSceneM.GoToScene(1);
     });
-    m_buttons[1]->setCallback([this]()
+    m_buttons[1]->setCallback([]()
     {
-        m_running = false;
+        uthEngine.Exit();
     });
     
     for (size_t i = 0; i < m_buttons.size(); ++i)
@@ -96,10 +80,10 @@ bool MenuScene::Init()
 
         b->transform.SetPosition(100.f, 100.f + (i * 50.f) + (i * b->transform.GetSize().y));
 
-        AddGameObjectToLayer(Default, b);
+        uth::Layer::AddChild(b);
     }
     #pragma endregion Buttons
-
+    
     #pragma region Particles
     {
         auto texture = uthRS.LoadTexture("menuParticle.png");
@@ -126,7 +110,7 @@ bool MenuScene::Init()
         ps->AddAffector(new ns::MenuParticleAffector());
 
         // We can add the particle system onto a layer.
-        AddGameObjectToLayer(Default, ps);
+        uth::Layer::AddChild(ps);
     }
     #pragma endregion Particles
 
@@ -138,7 +122,7 @@ bool MenuScene::DeInit()
     return true;
 }
 
-bool MenuScene::Update(float dt)
+void MenuScene::Update(float dt)
 {
     static const float pi = static_cast<float>(pmath::pi);
 
@@ -153,16 +137,12 @@ bool MenuScene::Update(float dt)
     /******************/
 
     // Update all layers.
-    UpdateLayers(dt);
-
-    // When we return false from Update(), the engine will close itself.
-    return m_running;
+    uth::Layer::Update(dt);
 }
 
-bool MenuScene::Draw()
+// The RenderTarget passed into the Scene Draw function will always be the window.
+void MenuScene::Draw(uth::RenderTarget& target, uth::RenderAttributes)
 {
     // Draw all layers.
-    DrawLayers(uthEngine.GetWindow());
-
-    return true;
+    uth::Layer::Draw(target);
 }

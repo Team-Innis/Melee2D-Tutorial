@@ -23,16 +23,17 @@ public:
 
     bool DeInit() override;
 
-    bool Update(float dt) override;
+    void Update(float dt) override;
 
-    bool Draw() override;
+    void Draw(uth::RenderTarget& target, uth::RenderAttributes attributes = uth::RenderAttributes()) override;
 
 
 
 private:
 
     uth::TMX::Map m_map;
-    uth::Camera m_camera;
+    uth::Camera& m_camera;
+    uth::Camera m_menuCamera;
     bool m_paused;
 
     uth::GameObject* m_player;
