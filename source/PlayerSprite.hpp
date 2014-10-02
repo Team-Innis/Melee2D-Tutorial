@@ -12,6 +12,7 @@ namespace ns
 {
     class PlayerSprite final : public uth::Component
     {
+        friend class Player;
 
         enum BodyPart
         {

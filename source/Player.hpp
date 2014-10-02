@@ -18,6 +18,9 @@ namespace ns
         ~Player() override;
 
 
+        bool CheckCollision(const uth::Transform& object);
+
+
     private:
 
         void update(float dt) override;
@@ -27,6 +30,7 @@ namespace ns
         PlayerSprite* m_sprite;
         float m_hitCooldown;
         float m_shootCooldown;
+        int m_health;
     };
 }
 

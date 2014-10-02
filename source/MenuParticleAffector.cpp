@@ -58,8 +58,7 @@ void MenuParticleAffector::UpdateParticle(uth::Particle& particle, const uth::Pa
 
     // Rotate the particle according to it's direction.
     static const pmath::Vec2 upVec(0.f, -1.f);
-    pmath::Vec2 normal = particle.direction;
-    particle.SetRotation(pmath::radiansToDegrees(-std::acosf(upVec.dot(normal.normalize()))));
+    particle.SetRotation(-pmath::acos(upVec.dot(particle.direction.unitVector())));
 
     // Add the particle's direction to its translation.
     particle.Move(particle.direction * dt);

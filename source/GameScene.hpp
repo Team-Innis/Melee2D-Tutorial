@@ -31,14 +31,16 @@ public:
 
 private:
 
+    uth::Object* m_gameLayer;
+    uth::Object* m_menuLayer;
+
     uth::TMX::Map m_map;
     uth::Camera& m_camera;
     uth::Camera m_menuCamera;
-    bool m_paused;
 
     uth::GameObject* m_player;
-    uth::SpriteBatch* m_enemyBatch;
-    std::vector<uth::Transform> m_enemies;
+    uth::ParticleSystem* m_enemySystem;
+    float m_enemyTimer;
 
 };
 
