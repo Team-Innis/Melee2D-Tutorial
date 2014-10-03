@@ -5,7 +5,7 @@
 namespace ns
 {
 
-    PlayerProjectile::PlayerProjectile()
+    PlayerProjectile::PlayerProjectile(const float direction, const float speed)
         : uth::GameObject(),
           m_timer(0.f),
           m_direction()
@@ -13,19 +13,7 @@ namespace ns
         auto tex = uthRS.LoadTexture("enemy.png");
 
         AddComponent(new uth::Sprite(tex));
-    }
 
-
-    void PlayerProjectile::update(float dt)
-    {
-        transform.Move(m_direction * dt);
-
-        if ((m_timer += dt) >= 1.5f)
-            SetActive(false);
-    }
-
-    void PlayerProjectile::Shoot(const float direction, const float speed)
-    {
         SetActive(true);
 
         const float sine = pmath::sin(direction);
@@ -35,5 +23,14 @@ namespace ns
         m_direction.normalize();
         m_direction.x *= speed;
         m_direction.y *= speed;
+    }
+
+
+    void PlayerProjectile::update(float dt)
+    {
+        transform.Move(m_direction * dt);
+
+        if ((m_timer += dt) >= 1.5f)
+            SetActive(false);
     }
 }

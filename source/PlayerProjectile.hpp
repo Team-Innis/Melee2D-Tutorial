@@ -11,9 +11,7 @@ namespace ns
     {
     public:
 
-        PlayerProjectile();
-
-        void Shoot(const float direction, const float speed);
+        PlayerProjectile(const float direction, const float speed);
 
 
     private:

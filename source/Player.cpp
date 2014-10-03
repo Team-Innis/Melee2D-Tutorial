@@ -6,7 +6,7 @@
 
 namespace
 {
-    const float ns_shootCooldown = 0.25f;
+    const float ns_shootCooldown = 0.5f;
     const float ns_hitCooldown = 0.25f;
 }
 
@@ -17,7 +17,7 @@ namespace ns
     Player::Player()
         : uth::GameObject("Player"),
           m_sprite(new PlayerSprite()),
-          m_projectile(),
+          m_projectiles(),
           m_hitCooldown(ns_hitCooldown),
           m_shootCooldown(ns_shootCooldown),
           m_health(5),
@@ -49,12 +49,20 @@ namespace ns
             return true;
         }
 
-        if (m_projectile.IsActive() &&
-            object.GetBounds().intersects(m_projectile.transform.GetBounds()))
+        m_projectiles.erase(std::remove_if(m_projectiles.begin(), m_projectiles.end(), [](const std::unique_ptr<PlayerProjectile>& p)
         {
-            m_projectile.SetActive(false);
+            return !p->IsActive();
+        }), m_projectiles.end());
 
-            return true;
+        for (auto& i : m_projectiles)
+        {
+            if (object.GetBounds().intersects(i->transform.GetBounds()))
+            {
+                i->SetActive(false);
+
+                uth::WriteLog("Hit 3");
+                return true;
+            }
         }
 
         return false;
@@ -65,8 +73,8 @@ namespace ns
         if ((m_shootCooldown -= dt) <= 0.f && uthInput.Mouse.IsButtonPressed(uth::Mouse::LEFT))
         {
             m_sprite->ShootAnim();
-            m_projectile.Shoot(transform.GetRotation(), 250.f);
-            m_projectile.transform.SetPosition(transform.GetPosition());
+            m_projectiles.emplace_back(new PlayerProjectile(transform.GetRotation(), 400.f));
+            m_projectiles.back()->transform.SetPosition(transform.GetPosition());
             m_shootCooldown = ns_shootCooldown;
         }
         if ((m_hitCooldown -= dt) <= 0.f && uthInput.Mouse.IsButtonPressed(uth::Mouse::RIGHT))
@@ -89,11 +97,13 @@ namespace ns
                        (uthInput.Keyboard.IsKeyDown(uth::Keyboard::S) -
                         uthInput.Keyboard.IsKeyDown(uth::Keyboard::W)) * speed);
 
-        m_projectile.Update(dt);
+        for (auto& i : m_projectiles)
+            i->Update(dt);
     }
 
     void Player::draw(uth::RenderTarget& target)
     {
-        m_projectile.Draw(target);
+        for (auto& i : m_projectiles)
+            i->Draw(target);
     }
 }

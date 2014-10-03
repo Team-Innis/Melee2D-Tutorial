@@ -13,6 +13,9 @@ namespace ns
 
     class Player final : public uth::GameObject
     {
+
+        Player(const Player&) = delete;
+
     public:
 
         Player();
@@ -32,7 +35,7 @@ namespace ns
 
         // Member data
         PlayerSprite* m_sprite;
-        PlayerProjectile m_projectile;
+        std::vector<std::unique_ptr<PlayerProjectile>> m_projectiles;
         float m_hitCooldown;
         float m_shootCooldown;
         int m_health;
