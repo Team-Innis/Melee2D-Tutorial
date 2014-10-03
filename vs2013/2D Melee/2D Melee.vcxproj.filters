@@ -45,6 +45,9 @@
     <ClCompile Include="..\..\source\GameEnemyAffector.cpp">
       <Filter>Source Files\particle Affectors</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\PlayerProjectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\GameScene.hpp">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\GameEnemyAffector.hpp">
       <Filter>Header Files\Particle Affectors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\PlayerProjectile.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,8 +26,6 @@ public:
 
     void Update(float dt) override;
 
-    void Draw(uth::RenderTarget& target, uth::RenderAttributes attributes = uth::RenderAttributes()) override;
-
 
 
 private:

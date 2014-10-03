@@ -124,25 +124,18 @@ bool MenuScene::DeInit()
 
 void MenuScene::Update(float dt)
 {
-    static const float pi = static_cast<float>(pmath::pi);
+    static const float halfPi = static_cast<float>(pmath::pi) / 2.f;
 
     /* Button floating animation */
     /**/ static float sine = 0.f;
     /**/ static const float initial0 = m_buttons[0]->transform.GetPosition().y,
                             initial1 = m_buttons[1]->transform.GetPosition().y;
-    /**/ sine += dt * (pi / 2.f);
+    /**/ sine += dt * halfPi;
     /**/
     /**/ m_buttons[0]->transform.SetPosition(m_buttons[0]->transform.GetPosition().x, initial0 + 10.f * std::sinf(sine));
-    /**/ m_buttons[1]->transform.SetPosition(m_buttons[1]->transform.GetPosition().x, initial1 + 10.f * std::sinf(sine + (pi / 2.f)));
+    /**/ m_buttons[1]->transform.SetPosition(m_buttons[1]->transform.GetPosition().x, initial1 + 10.f * std::sinf(sine + halfPi));
     /******************/
 
     // Update all layers.
     uth::Layer::Update(dt);
-}
-
-// The RenderTarget passed into the Scene Draw function will always be the window.
-void MenuScene::Draw(uth::RenderTarget& target, uth::RenderAttributes)
-{
-    // Draw all layers.
-    uth::Layer::Draw(target);
 }

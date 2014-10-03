@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\source\MenuParticleAffector.cpp" />
     <ClCompile Include="..\..\source\MenuScene.cpp" />
     <ClCompile Include="..\..\source\Player.cpp" />
+    <ClCompile Include="..\..\source\PlayerProjectile.cpp" />
     <ClCompile Include="..\..\source\PlayerSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <ClInclude Include="..\..\source\MenuParticleAffector.hpp" />
     <ClInclude Include="..\..\source\MenuScene.hpp" />
     <ClInclude Include="..\..\source\Player.hpp" />
+    <ClInclude Include="..\..\source\PlayerProjectile.hpp" />
     <ClInclude Include="..\..\source\PlayerSprite.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

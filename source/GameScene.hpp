@@ -25,8 +25,6 @@ public:
 
     void Update(float dt) override;
 
-    void Draw(uth::RenderTarget& target, uth::RenderAttributes attributes = uth::RenderAttributes()) override;
-
 
 
 private:
@@ -34,7 +32,7 @@ private:
     uth::Object* m_gameLayer;
     uth::Object* m_menuLayer;
 
-    uth::TMX::Map m_map;
+    uth::TMX::Map* m_map;
     uth::Camera& m_camera;
     uth::Camera m_menuCamera;
 

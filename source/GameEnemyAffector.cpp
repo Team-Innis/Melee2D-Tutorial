@@ -33,7 +33,7 @@ namespace ns
             particle.Move(targetVec.x * speed * dt, targetVec.y * speed * dt);
             
             if (m_player->CheckCollision(particle))
-                particle.lifetime += pt.lifetime;
+                particle.lifetime = 1.f;
         }
     }
 
