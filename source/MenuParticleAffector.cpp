@@ -19,7 +19,7 @@ MenuParticleAffector::~MenuParticleAffector()
 
 void ns::MenuParticleAffector::InitParticle(uth::Particle& particle, const uth::ParticleTemplate& pt)
 {
-    // This lambda function initializes the particles in the way we want.
+    // This function initializes the particles in the way we want.
     // In this case the general direction of the vector is set to point somwehere in the lower left corner of the screen.
 
     particle.direction = pmath::Vec2(uth::Randomizer::GetFloat(-0.4f, -0.0f),

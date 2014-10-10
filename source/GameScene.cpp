@@ -53,7 +53,7 @@ bool GameScene::Init()
 
     uth::ParticleTemplate pt;
 
-    // Passing a negative value as the life time the particles will live indefinitely.
+    // Passing a negative value as the life time causes the particles to live indefinitely.
     pt.SetLifetime(-1.f);
 
     // Set a constant speed.
