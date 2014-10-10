@@ -19,26 +19,31 @@ PlayerSprite::~PlayerSprite()
 
 void PlayerSprite::Init()
 {
+    // Load the textures.
     auto mainTex = uthRS.LoadTexture("body.png");
     auto leftTex = uthRS.LoadTexture("leftArm.png");
     auto rightTex = uthRS.LoadTexture("rightArm.png");
 
+    // If any of the textures failed to load, emit an error and return.
     if (!mainTex || !leftTex || !rightTex)
     {
         uth::WriteError("Failed to load one or more player textures!");
         return;
     }
 
+    // Create the body parts.
     for (auto& i : m_sprites)
     {
         i = new uth::GameObject();
         this->parent->AddChild(i);
     }
 
+    // Add sprites for the body parts.
     m_sprites[Body]->AddComponent(new uth::Sprite(mainTex, "Body"));
     m_sprites[Left]->AddComponent(new uth::Sprite(leftTex, "Left"));
     m_sprites[Right]->AddComponent(new uth::Sprite(rightTex, "Right"));
 
+    // Set their properties.
     m_sprites[Left]->transform.SetOrigin(uth::Origin::BottomCenter);
     m_sprites[Right]->transform.SetOrigin(uth::Origin::BottomCenter);
     m_sprites[Left]->transform.SetPosition(55.f, 15.f);
@@ -50,6 +55,7 @@ void PlayerSprite::Init()
 
 void PlayerSprite::Update(float dt)
 {
+    // Animate the "hands".
     m_leftDelta = std::min(1.f, m_leftDelta + dt * 2.f);
     m_rightDelta = std::min(1.f, m_rightDelta + dt * 2.f);
 

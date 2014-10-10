@@ -28,10 +28,12 @@ namespace ns
         {
             static const float speed = static_cast<float>(particle.direction.length());
 
+            // Move the particle(enemy) towards the player.
             auto targetVec = (m_player->transform.GetPosition() - particle.GetPosition()).normalize();
 
             particle.Move(targetVec.x * speed * dt, targetVec.y * speed * dt);
             
+            // When collision with a player happened, set the lifetime to a positive value so this particle will be cleaned up.
             if (m_player->CheckCollision(particle))
                 particle.lifetime = 1.f;
         }
@@ -41,5 +43,4 @@ namespace ns
     {
         m_player = playerPtr;
     }
-
 }

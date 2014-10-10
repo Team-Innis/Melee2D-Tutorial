@@ -25,6 +25,7 @@ GameScene::~GameScene()
 
 bool GameScene::Init()
 {
+    // Create the "layers" and set them active/inactive
     m_gameLayer = AddChild(new uth::Object()).get();
     m_gameLayer->SetActive(true);
     m_menuLayer = AddChild(new uth::Object()).get();

@@ -10,12 +10,13 @@ namespace ns
           m_timer(0.f),
           m_direction()
     {
+        // Load a texture and create a sprite component.
         auto tex = uthRS.LoadTexture("enemy.png");
-
         AddComponent(new uth::Sprite(tex));
 
         SetActive(true);
 
+        // Compute a rotation vector from the given angle. (This doesn't currently work for some reason)
         const float sine = pmath::sin(direction);
         m_direction.x = sine * 1.f;
         m_direction.y = sine * m_direction.x + pmath::cos(direction) * 1.f;
